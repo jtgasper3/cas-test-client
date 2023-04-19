@@ -1,6 +1,6 @@
 <?php
-// error_reporting(E_ALL & ~E_USER_DEPRECATED);
-error_reporting(0);
+error_reporting(E_ALL & ~E_USER_DEPRECATED);
+// error_reporting(0);
 // Load the settings from the central config file
 require_once 'config.php';
 // Load the CAS lib
@@ -37,7 +37,6 @@ if (isset($_REQUEST['logout'])) {
 	phpCAS::logout();
 }
 
-// for this test, simply print that the authentication was successfull
 ?>
 <html>
   <head>
@@ -48,7 +47,7 @@ if (isset($_REQUEST['logout'])) {
 
     <p>the user's login is <b><?php echo phpCAS::getUser(); ?></b>.</p>
     <p>phpCAS version is <b><?php echo phpCAS::getVersion(); ?></b>.</p>
-    <p><a href="/">Main Menu</a></p>
+    <p><a href="?logout=true">Clear Session</a></p>
 
     <h3>User Attributes</h3>
     <ul>

@@ -23,13 +23,8 @@ $phpcas_path = '/usr/local/lib/php';
 // Basic Config of the phpCAS client //
 ///////////////////////////////////////
 
-// Full Hostname of your CAS Server
-$cas_host = 'secure-dev.its.yale.edu';
-
-// Context of the CAS Server
+$cas_host = getenv('CAS_HOSTNAME', true) ?: getenv('CAS_HOSTNAME'); // 'secure-dev.its.yale.edu';
 $cas_context = '/cas';
-
-// Port of your CAS server. Normally for a https server it's 443
 $cas_port = 443;
 
 // Path to the ca chain that issued the cas server certificate
@@ -43,22 +38,15 @@ $cas_port = 443;
 // Assumes the cas server is load balanced across multiple hosts
 #$cas_real_hosts = array('cas-real-1.example.com', 'cas-real-2.example.com');
 
-$client_service_name = 'http://cas-test-client-dev.svc.iam.aws.yale.edu';
-
 // Client config for cookie hardening
-$client_domain = 'cas-test-client.svc.iam.aws.yale.edu';
+$client_domain = getenv('CLIENT_HOSTNAME', true) ?: getenv('CLIENT_HOSTNAME'); // 'cas-test-client-dev.svc.iam.aws.yale.edu';
 $client_path = '/';
 $client_secure = true;
 $client_httpOnly = true;
 $client_lifetime = 0;
 
-// Database config for PGT Storage
-//$db = 'pgsql:host=localhost;dbname=phpcas';
-//$db = 'mysql:host=localhost;dbname=phpcas';
-//$db_user = 'phpcasuser';
-//$db_password = 'mysupersecretpass';
-//$db_table = 'phpcastabel';
-//$driver_options = '';
+
+$client_service_name = "http://{$client_domain}";
 
 ///////////////////////////////////////////
 // End Configuration -- Don't edit below //
